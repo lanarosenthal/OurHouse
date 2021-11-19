@@ -5,7 +5,7 @@ const isAuthenticated = require('../middleware/isAuthenticated');
 const router = express.Router();
 
 // bill list
-router.get('/bills', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const bill = await Bill.find({});
     res.json(bill);
@@ -15,7 +15,7 @@ router.get('/bills', async (req, res) => {
 });
 
 // bills/add
-router.post('/bills/add', isAuthenticated, async (req, res) => {
+router.post('/add', isAuthenticated, async (req, res) => {
   const { billType, amount, dateDue } = req.body;
 
   try {
@@ -29,7 +29,7 @@ router.post('/bills/add', isAuthenticated, async (req, res) => {
 });
 
 // toggle paid
-router.post('/bills/update', isAuthenticated, async (req, res) => {
+router.post('/update', isAuthenticated, async (req, res) => {
   const { _id } = req.body;
 
   try {

@@ -5,7 +5,7 @@ const isAuthenticated = require('../middleware/isAuthenticated');
 const router = express.Router();
 
 // shopping list
-router.get('/items', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const it = await ShoppingItem.find({});
     res.json(it);
@@ -15,7 +15,7 @@ router.get('/items', async (req, res) => {
 });
 
 // items/add
-router.post('/items/add', isAuthenticated, async (req, res) => {
+router.post('/add', isAuthenticated, async (req, res) => {
   const { item, quantity } = req.body;
 
   try {
@@ -27,7 +27,7 @@ router.post('/items/add', isAuthenticated, async (req, res) => {
 });
 
 // update item
-router.post('/items/update', isAuthenticated, async (req, res) => {
+router.post('/update', isAuthenticated, async (req, res) => {
   const { item, quantity } = req.body;
 
   try {
@@ -40,7 +40,7 @@ router.post('/items/update', isAuthenticated, async (req, res) => {
 });
 
 // delete item
-router.post('/items/delete', isAuthenticated, async (req, res) => {
+router.post('/delete', isAuthenticated, async (req, res) => {
   const { item, quantity } = req.body;
 
   try {

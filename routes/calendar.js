@@ -5,7 +5,7 @@ const isAuthenticated = require('../middleware/isAuthenticated');
 const router = express.Router();
 
 // calendar
-router.get('/calendar', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const cal = await Calendar.find({});
     res.json(cal);
@@ -15,7 +15,7 @@ router.get('/calendar', async (req, res) => {
 });
 
 // calendar/add
-router.post('/calendar/add', isAuthenticated, async (req, res) => {
+router.post('/add', isAuthenticated, async (req, res) => {
   const { eventDate, roommateName, event } = req.body;
 
   try {
@@ -27,7 +27,7 @@ router.post('/calendar/add', isAuthenticated, async (req, res) => {
 });
 
 // delete cal entry
-router.post('/calendar/delete', isAuthenticated, async (req, res) => {
+router.post('/delete', isAuthenticated, async (req, res) => {
   const { eventDate, roommateName, event } = req.body;
 
   try {
