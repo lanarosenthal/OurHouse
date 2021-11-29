@@ -1,0 +1,45 @@
+module.exports = {
+  env: {
+    browser: true,
+    node: true,
+    es6: true,
+  },
+  extends: [
+    'plugin:react/recommended',
+    'airbnb',
+  ],
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 13,
+    sourceType: 'module',
+  },
+  plugins: [
+    'react',
+  ],
+  rules: {
+    'brace-style': [2, '1tbs'],
+    camelcase: 0,
+    'no-bitwise': 2,
+    'no-empty': 2,
+    'no-ex-assign': 2,
+    'no-lonely-if': 2,
+    'no-mixed-spaces-and-tabs': 2,
+    'no-tabs': 2,
+    'no-underscore-dangle': 0,
+    'no-unused-vars': 0,
+    'quote-props': [2, 'as-needed'],
+    quotes: [2, 'single', { avoidEscape: true, allowTemplateLiterals: true }],
+    strict: 0,
+    semi: ['error', 'never'],
+    'arrow-parens': ['error', 'as-needed'],
+    'react/jsx-filename-extension': 0,
+    'react/prop-types': 0,
+    'no-plusplus': 0,
+    'max-len': 0,
+    'react/jsx-props-no-spreading': 0,
+    'jsx-a11y/label-has-associated-control': 0,
+    'jsx-a11y/img-redundant-alt': 0,
+  },
+}

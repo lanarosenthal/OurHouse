@@ -1,10 +1,10 @@
 const isAuthenticated = (req, _res, next) => {
   // console.log(req.session);
   if (req.session.username && req.session.username !== '') {
-    next();
+    next()
   } else {
-    next(new Error('authentication failed'));
+    next(new Error('authentication failed'))
   }
-};
+}
 
-module.exports = isAuthenticated;
+module.exports = isAuthenticated
