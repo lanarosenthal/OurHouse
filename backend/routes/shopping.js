@@ -19,8 +19,8 @@ router.post('/add', isAuthenticated, async (req, res) => {
   const { item, quantity } = req.body
 
   try {
-    const it = await ShoppingItem.create({ item, quantity })
-    res.send(it)
+    await ShoppingItem.create({ item, quantity })
+    res.send('item added')
   } catch (err) {
     res.send('adding item has problems')
   }

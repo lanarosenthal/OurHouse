@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Login from './Login'
 import Signup from './Signup'
+import ShoppingList from './ShoppingList'
+import BillsList from './BillsList'
 
 const App = function () {
   const [sessionUsername, setSessionUsername] = useState('')
@@ -9,9 +11,10 @@ const App = function () {
   return (
     <>
       <p>HIIIII</p>
-      <p>yoo</p>
       <Login setSessionUsername={setSessionUsername} setLoggedIn={setLoggedIn} />
       <Signup />
+      <ShoppingList loggedIn={loggedIn} />
+      <BillsList loggedIn={loggedIn} />
     </>
   )
 }

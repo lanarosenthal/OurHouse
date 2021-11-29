@@ -19,10 +19,10 @@ router.post('/add', isAuthenticated, async (req, res) => {
   const { billType, amount, dateDue } = req.body
 
   try {
-    const bill = await Bill.create({
+    await Bill.create({
       billType, amount, dateDue, paid: false,
     })
-    res.send(bill)
+    res.send('bill added')
   } catch (err) {
     res.send('adding bill has problems')
   }
