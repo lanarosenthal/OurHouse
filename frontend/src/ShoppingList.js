@@ -72,102 +72,93 @@ const ShoppingList = function ({ loggedIn, house }) {
   }
 
   return (
-    <Router>
-      <div>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/dashboard">Dashboard</Link>
-          </li>
-        </ul>
+    <>
 
-        <hr />
+      <h1>Items:</h1>
+      <Link to="/billslist">
+        Bills
+      </Link>
+      <Link to="/calendarlist">
+        Calendar
+      </Link>
+      <br />
+      {loggedIn
+        ? (
+          <>
+            <Button variant="primary" onClick={handleShow}>
+              Add an item
+            </Button>
+            <br />
+            <Modal show={show} onHide={handleClose}>
+              Item:
+              <input onChange={e => setIt(e.target.value)} />
+              Quantity:
+              <input onChange={e => setQuant(e.target.value)} />
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+                <Button variant="primary" onClick={addItem}>
+                  Save Changes
+                </Button>
+              </Modal.Footer>
+            </Modal>
 
-        <h1>Items:</h1>
+            {shopList.map(listItem => (
+              <div className="card-deck">
+                {listItem.item}
+              &nbsp;
+                {listItem.quantity}
+                <br />
+                {loggedIn
+                  ? (
+                    <>
+                      <button
+                        type="submit"
+                        onClick={e => {
+                          setIt(listItem.item)
+                          setQuant(listItem.quantity)
+                          setEditModal(true)
+                        }}
+                      >
+                        Edit&nbsp;
+                        {listItem.item}
+                      </button>
+                      <br />
 
-        {loggedIn
-          ? (
+                    </>
+                  )
+                  : (<br />)}
+              </div>
+            ))}
+
+            <Modal show={editModal}>
+              <button
+                type="submit"
+                onClick={deleteItem}
+              >
+                Delete
+              </button>
+              <input onChange={e => setQuant(e.target.value)} />
+              <button
+                type="submit"
+                onClick={updateItem}
+              >
+                update
+              </button>
+            </Modal>
+          </>
+        ) : (
+          <Link to="/login">
             <>
-              <Button variant="primary" onClick={handleShow}>
-                Add an item
+              <Button variant="primary">
+                Log in to add and view items
               </Button>
               <br />
-              <Modal show={show} onHide={handleClose}>
-                Item:
-                <input onChange={e => setIt(e.target.value)} />
-                Quantity:
-                <input onChange={e => setQuant(e.target.value)} />
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={handleClose}>
-                    Close
-                  </Button>
-                  <Button variant="primary" onClick={addItem}>
-                    Save Changes
-                  </Button>
-                </Modal.Footer>
-              </Modal>
-
-              {shopList.map(listItem => (
-                <div className="card-deck">
-                  {listItem.item}
-              &nbsp;
-                  {listItem.quantity}
-                  <br />
-                  {loggedIn
-                    ? (
-                      <>
-                        <button
-                          type="submit"
-                          onClick={e => {
-                            setIt(listItem.item)
-                            setQuant(listItem.quantity)
-                            setEditModal(true)
-                          }}
-                        >
-                          Edit&nbsp;
-                          {listItem.item}
-                        </button>
-                        <br />
-
-                      </>
-                    )
-                    : (<br />)}
-                </div>
-              ))}
-
-              <Modal show={editModal}>
-                <button
-                  type="submit"
-                  onClick={deleteItem}
-                >
-                  Delete
-                </button>
-                <input onChange={e => setQuant(e.target.value)} />
-                <button
-                  type="submit"
-                  onClick={updateItem}
-                >
-                  update
-                </button>
-              </Modal>
             </>
-          ) : (
-            <Link to="/login">
-              <>
-                <Button variant="primary">
-                  Log in to add and view items
-                </Button>
-                <br />
-              </>
-            </Link>
-          )}
-      </div>
-    </Router>
+          </Link>
+        )}
+    </>
   )
 }
 

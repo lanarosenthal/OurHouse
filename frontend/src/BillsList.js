@@ -49,6 +49,13 @@ const BillsList = function ({ loggedIn }) {
   return (
     <>
       <h1>Bills:</h1>
+      <Link to="/shoppinglist">
+        Shopping List
+      </Link>
+      <Link to="/calendarlist">
+        Calendar
+      </Link>
+      <br />
       {loggedIn
         ? (
           <>
@@ -72,45 +79,46 @@ const BillsList = function ({ loggedIn }) {
                 </Button>
               </Modal.Footer>
             </Modal>
+            {billList.map(bill => (
+              <>
+                {bill.billType}
+                <br />
+                {bill.amount}
+                <br />
+                {bill.dateDue}
+                <br />
+                Bill paid:&nbsp;
+                {bill.paid ? ('true') : ('false')}
+                <br />
+                {!bill.paid
+                  ? (
+                    <button
+                      type="submit"
+                      onClick={e => {
+                        setID(bill._id)
+                        setID(_id => {
+                          console.log(_id)
+                          togglePaid({ _id })
+                        })
+                      }}
+                    >
+                      Mark as Paid
+                    </button>
+                  ) : (<br />)}
+              </>
+            ))}
           </>
         ) : (
-      // <Link to="/login">
-          <>
-            <Button variant="primary">
-              Log in to add a bill
-            </Button>
-            <br />
-          </>
-          // </Link>
+          <Link to="/login">
+            <>
+              <Button variant="primary">
+                Log in to add a bill
+              </Button>
+              <br />
+            </>
+          </Link>
         )}
-      {billList.map(bill => (
-        <>
-          {bill.billType}
-          <br />
-          {bill.amount}
-          <br />
-          {bill.dateDue}
-          <br />
-          Bill paid:&nbsp;
-          {bill.paid ? ('true') : ('false')}
-          <br />
-          {!bill.paid
-            ? (
-              <button
-                type="submit"
-                onClick={e => {
-                  setID(bill._id)
-                  setID(_id => {
-                    console.log(_id)
-                    togglePaid({ _id })
-                  })
-                }}
-              >
-                Mark as Paid
-              </button>
-            ) : (<br />)}
-        </>
-      ))}
+
     </>
   )
 }

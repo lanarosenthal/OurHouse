@@ -49,6 +49,13 @@ const Calendar = function ({ loggedIn, roommateName }) {
   return (
     <>
       <h1>Events:</h1>
+      <Link to="/billslist">
+        Bills
+      </Link>
+      <Link to="/shoppinglist">
+        Shopping List
+      </Link>
+      <br />
       {loggedIn
         ? (
           <>
@@ -70,51 +77,52 @@ const Calendar = function ({ loggedIn, roommateName }) {
                 </Button>
               </Modal.Footer>
             </Modal>
-          </>
-        ) : (
-      // <Link to="/login">
-          <>
-            <Button variant="primary">
-              Log in to add an event
-            </Button>
-            <br />
-          </>
-      // </Link>
-        )}
-      {calList.map(ev => (
-        <>
-          {ev.event}
-          <br />
-          {ev.eventDate}
-          <br />
-          {ev.roommateName}
-          <br />
-          {(roommateName === ev.roommateName)
-            ? (
+
+            { calList.map(ev => (
               <>
-                <button
-                  type="submit"
-                  onClick={e => {
-                    setEvent(ev.event)
-                    setEventDate(ev.eventDate)
-                    setMarked(true)
-                  }}
-                >
-                  Mark For Deletion
-                </button>
-                {mark
+                {ev.event}
+                <br />
+                {ev.eventDate}
+                <br />
+                {ev.roommateName}
+                <br />
+                {(roommateName === ev.roommateName)
                   ? (
-                    <button
-                      type="submit"
-                      onClick={deleteEvent}
-                    >
-                      Delete
-                    </button>
+                    <>
+                      <button
+                        type="submit"
+                        onClick={e => {
+                          setEvent(ev.event)
+                          setEventDate(ev.eventDate)
+                          setMarked(true)
+                        }}
+                      >
+                        Mark For Deletion
+                      </button>
+                      {mark
+                        ? (
+                          <button
+                            type="submit"
+                            onClick={deleteEvent}
+                          >
+                            Delete
+                          </button>
+                        ) : (<br />)}
+                    </>
                   ) : (<br />)}
               </>
-            ) : (<br />)}
-        </>
-      ))}
+            ))}
+          </>
+        ) : (
+          <Link to="/login">
+            <>
+              <Button variant="primary">
+                Log in to add an event
+              </Button>
+              <br />
+            </>
+          </Link>
+        )}
     </>
   )
 }
