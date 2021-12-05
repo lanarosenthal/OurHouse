@@ -55,6 +55,7 @@ const BillsList = function ({ loggedIn }) {
             <Button variant="primary" onClick={handleShow}>
               Add a bill
             </Button>
+            <br />
             <Modal show={show} onHide={handleClose}>
               Bill Description:
               <input onChange={e => setBillType(e.target.value)} />
@@ -74,9 +75,12 @@ const BillsList = function ({ loggedIn }) {
           </>
         ) : (
       // <Link to="/login">
-          <Button variant="primary">
-            Log in to add a bill
-          </Button>
+          <>
+            <Button variant="primary">
+              Log in to add a bill
+            </Button>
+            <br />
+          </>
           // </Link>
         )}
       {billList.map(bill => (

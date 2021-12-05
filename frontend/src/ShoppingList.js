@@ -65,12 +65,14 @@ const ShoppingList = function ({ loggedIn }) {
 
   return (
     <>
+      <h1>Items:</h1>
       {loggedIn
         ? (
           <>
             <Button variant="primary" onClick={handleShow}>
               Add an item
             </Button>
+            <br />
             <Modal show={show} onHide={handleClose}>
               Item:
               <input onChange={e => setIt(e.target.value)} />
@@ -87,13 +89,15 @@ const ShoppingList = function ({ loggedIn }) {
             </Modal>
           </>
         ) : (
-          // <Link to="/login">
-          <Button variant="primary">
-            Log in to add an item
-          </Button>
-          // </Link>
+      // <Link to="/login">
+          <>
+            <Button variant="primary">
+              Log in to add an item
+            </Button>
+            <br />
+          </>
+      // </Link>
         )}
-      <h1>Items:</h1>
       {shopList.map(listItem => (
         <>
           {listItem.item}

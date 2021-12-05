@@ -19,8 +19,8 @@ router.post('/add', isAuthenticated, async (req, res) => {
   const { eventDate, roommateName, event } = req.body
 
   try {
-    const cal = await Calendar.create({ eventDate, roommateName, event })
-    res.send(cal)
+    await Calendar.create({ eventDate, roommateName, event })
+    res.send('event added')
   } catch (err) {
     res.send('adding calendar item has problems')
   }
