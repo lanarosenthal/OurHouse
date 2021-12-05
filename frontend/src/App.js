@@ -25,7 +25,10 @@ const App = function () {
         <Routes>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login setSessionHouse={setSessionHouse} setSessionUsername={setSessionUsername} setLoggedIn={setLoggedIn} />} />
-          <Route path="/home" element={<ShoppingList loggedIn={loggedIn} house={sessionHouse} />} />
+          <Route path="/shoppinglist" element={<ShoppingList loggedIn={loggedIn} house={sessionHouse} />} />
+          <Route path="/billslist" element={<BillsList loggedIn={loggedIn} />} />
+          <Route path="/list" element={<Calendar roommateName={sessionUsername} loggedIn={loggedIn} />} />
+
         </Routes>
       </Router>
 

@@ -25,7 +25,7 @@ const Login = function ({ setSessionUsername, setLoggedIn, setSessionHouse }) {
       setSessionUsername(username)
       setSessionHouse(house)
       setLoggedIn(true)
-      setLink('/home')
+      setLink('/shoppinglist')
     } else {
       window.alert(data)
     }
