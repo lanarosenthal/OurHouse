@@ -14,7 +14,6 @@ const Login = function ({ setSessionUsername, setLoggedIn, setSessionHouse }) {
   const [house, setHouse] = useState('')
   const [link, setLink] = useState('/login')
 
-
   const loginUser = async () => {
     console.log(username)
     console.log(password)
@@ -33,22 +32,9 @@ const Login = function ({ setSessionUsername, setLoggedIn, setSessionHouse }) {
 
   return (
     <>
-      {/* <p>Username:</p>
-      <input onChange={e => setUsername(e.target.value)} />
-      <br />
-      <p>Password:</p>
-      <input onChange={e => setPassword(e.target.value)} />
-      <br />
-      <br />
-      {/* <Link to="/"> */}
-      {/* <button type="submit" onClick={loginUser}> Login </button> */}
-      {/* </Link> */}
-      {/* <p> */}
-      {/* Not yet registered? */}
-      {/* <Link to="/signup"> Sign up</Link> */}
-      {/* </p> */}
-      <Card className="border border-primary rounded">
-        <Form>
+      <h1 style={{ textAlign: 'center', marginTop: `50px` }}>OurHouse</h1>
+      <Card className="signuplogin border border-primary rounded">
+        <Form className="forminside">
           <Form.Group className="mb-3">
             <Form.Label>Username</Form.Label>
             <Form.Control placeholder="Enter Username" onChange={e => setUsername(e.target.value)} />
@@ -63,9 +49,11 @@ const Login = function ({ setSessionUsername, setLoggedIn, setSessionHouse }) {
             <Form.Label>House</Form.Label>
             <Form.Control placeholder="House Code" onChange={e => setHouse(e.target.value)} />
           </Form.Group>
-          <Button variant="primary" type="submit" onClick={loginUser}>
-            <Link to={link}>Login</Link>
-          </Button>
+          <Link to={link}>
+            <Button variant="primary" type="submit" onClick={loginUser}>
+              Login
+            </Button>
+          </Link>
           <br />
           <Form.Text className="text-muted">
             Not yet registered?

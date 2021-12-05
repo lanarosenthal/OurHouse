@@ -5,7 +5,6 @@ const path = require('path')
 
 const AccountRouter = require('./routes/account')
 const BillsRouter = require('./routes/bills')
-const CalendarRouter = require('./routes/calendar')
 const ItemsRouter = require('./routes/shopping')
 // const isAuthenticated = require('./middlewares/isAuthenticated');
 
@@ -31,7 +30,6 @@ app.use(express.json())
 
 app.use('/account', AccountRouter)
 app.use('/bills', BillsRouter)
-app.use('/calendar', CalendarRouter)
 app.use('/shopping', ItemsRouter)
 
 app.get('/favicon.ico', (req, res) => {

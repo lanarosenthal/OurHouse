@@ -7,7 +7,6 @@ import Card from 'react-bootstrap/Card'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-
 const Signup = function () {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -24,30 +23,12 @@ const Signup = function () {
 
   return (
     <>
-      {/* <p>Username:</p>
-      <input onChange={e => setUsername(e.target.value)} />
-      <br />
-      <p>Password:</p>
-      <input onChange={e => setPassword(e.target.value)} />
-      <br />
-      <br />
-      <p>House:</p>
-      <input onChange={e => setHouse(e.target.value)} />
-      <br />
-      <br />
-      {/* <Link to="/login"> */}
-      {/* <Button type="submit" onClick={createUser}> Create User </Button> */}
-      {/* </Link> */}
-      {/* <p>
-        Already have an account?
-        <Link to="/login"> Log in</Link>
-      </p>  */}
-
-      <Card className="border border-primary rounded">
-        <Form>
+      <h1 style={{ textAlign: 'center', marginTop: `50px` }}>OurHouse</h1>
+      <Card className="signuplogin border border-primary rounded">
+        <Form className="forminside">
           <Form.Group className="mb-3">
             <Form.Label>Username</Form.Label>
-            <Form.Control type="email" placeholder="Enter Username" onChange={e => setUsername(e.target.value)} />
+            <Form.Control placeholder="Enter Username" onChange={e => setUsername(e.target.value)} />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -57,11 +38,12 @@ const Signup = function () {
 
           <Form.Group className="mb-3">
             <Form.Label>House</Form.Label>
-            <Form.Control type="password" placeholder="House Code" onChange={e => setHouse(e.target.value)} />
+            <Form.Control placeholder="House Code" onChange={e => setHouse(e.target.value)} />
           </Form.Group>
           <Form.Text className="text-muted">
             Share this house code with your roommates so you can all use OurHouse!
           </Form.Text>
+          <br />
           <Link to="/login">
             <Button variant="primary" type="submit" onClick={createUser}>
               Signup

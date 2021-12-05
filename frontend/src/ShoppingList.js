@@ -3,6 +3,11 @@ import axios from 'axios'
 import Button from 'react-bootstrap/Button'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Modal from 'react-bootstrap/Modal'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import {Card, CardColumns } from 'react-bootstrap'
+
+import Container from 'react-bootstrap/Container'
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,7 +15,9 @@ import {
   Link,
 } from 'react-router-dom'
 
-const ShoppingList = function ({ loggedIn, house }) {
+const ShoppingList = function ({
+  setLoggedIn, setSessionUsername, loggedIn, house,
+}) {
   const [shopList, setShopList] = useState([])
   const [item, setIt] = useState('')
   const [quantity, setQuant] = useState(0)
@@ -71,17 +78,37 @@ const ShoppingList = function ({ loggedIn, house }) {
     }
   }
 
+  const logoutUser = async () => {
+    const { data } = await axios.get('/account/logout')
+    setLoggedIn(false)
+    setSessionUsername('')
+  }
+
   return (
     <>
-
+      <Navbar bg="light" expand="lg">
+        <Container>
+          <Navbar.Brand>OurHouse</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto justify-content-center">
+              <Link to="/shoppinglist">Shopping List</Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to="/billslist">Bills</Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to="/calendarlist">Calendar</Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Nav.Link href="/login" onClick={logoutUser}> Logout </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
       <h1>Items:</h1>
-      <Link to="/billslist">
-        Bills
-      </Link>
-      <Link to="/calendarlist">
-        Calendar
-      </Link>
-      <br />
       {loggedIn
         ? (
           <>
@@ -90,22 +117,23 @@ const ShoppingList = function ({ loggedIn, house }) {
             </Button>
             <br />
             <Modal show={show} onHide={handleClose}>
-              Item:
-              <input onChange={e => setIt(e.target.value)} />
-              Quantity:
-              <input onChange={e => setQuant(e.target.value)} />
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                  Close
-                </Button>
-                <Button variant="primary" onClick={addItem}>
-                  Save Changes
-                </Button>
-              </Modal.Footer>
+              <div>
+                Item:
+                <input onChange={e => setIt(e.target.value)} />
+                Quantity:
+                <input onChange={e => setQuant(e.target.value)} />
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleClose}>
+                    Close
+                  </Button>
+                  <Button variant="primary" onClick={addItem}>
+                    Save Changes
+                  </Button>
+                </Modal.Footer>
+              </div>
             </Modal>
-
             {shopList.map(listItem => (
-              <div className="card-deck">
+              <Card className="card-deck">
                 {listItem.item}
               &nbsp;
                 {listItem.quantity}
@@ -129,9 +157,8 @@ const ShoppingList = function ({ loggedIn, house }) {
                     </>
                   )
                   : (<br />)}
-              </div>
+              </Card>
             ))}
-
             <Modal show={editModal}>
               <button
                 type="submit"
