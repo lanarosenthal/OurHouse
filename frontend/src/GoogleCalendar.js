@@ -13,7 +13,7 @@ const addCalendarEvent = (startTime, address, clientName) => {
       apiKey: API_KEY,
       clientId: CLIENT_ID,
       discoveryDocs: DISCOVERY_DOCS,
-      scopes: SCOPES, 
+      scopes: SCOPES,
     })
 
     gapi.client.load('calendar', 'v3')
@@ -74,10 +74,10 @@ const addCalendarEvent = (startTime, address, clientName) => {
           resource: event,
         })
 
-        // request.execute(event => {
-        //   console.log(event)
-        //   window.open(event.htmlLink)
-        // })
+        request.execute(even => {
+          console.log(even)
+          window.open(even.htmlLink)
+        })
       })
   })
 }

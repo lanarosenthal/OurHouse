@@ -1,0 +1,17 @@
+.Card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  height: 60%;
+  margin-left: auto;
+  margin-top: 150px;
+  margin-right: auto;
+  margin-bottom: auto;
+}
+
+.Form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

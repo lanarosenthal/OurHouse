@@ -7,7 +7,7 @@ const router = express.Router()
 // shopping list
 router.get('/', async (req, res) => {
   try {
-    const it = await ShoppingItem.find({})
+    const it = await ShoppingItem.find()
     res.json(it)
   } catch (err) {
     res.send('error in finding items')
@@ -17,7 +17,8 @@ router.get('/', async (req, res) => {
 // items/add
 router.post('/add', isAuthenticated, async (req, res) => {
   const { item, quantity } = req.body
-
+  console.log(item)
+  console.log(quantity)
   try {
     await ShoppingItem.create({ item, quantity })
     res.send('item added')

@@ -4,6 +4,7 @@ const calendarSchema = new Schema({
   eventDate: Date,
   roommateName: String,
   event: String,
+  house: String,
 })
 
 module.exports = model('Calendar', calendarSchema)

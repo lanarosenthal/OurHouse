@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import { Link } from 'react-router-dom'
 
-const ShoppingList = function ({ loggedIn }) {
+const ShoppingList = function ({ loggedIn, house }) {
   const [shopList, setShopList] = useState([])
   const [item, setIt] = useState('')
   const [quantity, setQuant] = useState(0)
@@ -14,7 +14,8 @@ const ShoppingList = function ({ loggedIn }) {
   const handleShow = () => setShow(true)
 
   const addItem = async () => {
-    const { data } = await axios.post('/shopping/add', { item, quantity })
+    console.log('sessionHouse', house)
+    const { data } = await axios.post('/shopping/add', { item, quantity, house })
     if (data === 'item added') {
       setShow(false)
     } else {
@@ -24,6 +25,7 @@ const ShoppingList = function ({ loggedIn }) {
   }
 
   const retrieveItems = async () => {
+    console.log(house)
     const { data } = await axios.get('/shopping/')
     setShopList(data)
   }
@@ -66,6 +68,7 @@ const ShoppingList = function ({ loggedIn }) {
   return (
     <>
       <h1>Items:</h1>
+
       {loggedIn
         ? (
           <>
@@ -87,61 +90,61 @@ const ShoppingList = function ({ loggedIn }) {
                 </Button>
               </Modal.Footer>
             </Modal>
+
+            {shopList.map(listItem => (
+              <>
+                {listItem.item}
+              &nbsp;
+                {listItem.quantity}
+                <br />
+                {loggedIn
+                  ? (
+                    <>
+                      <button
+                        type="submit"
+                        onClick={e => {
+                          setIt(listItem.item)
+                          setQuant(listItem.quantity)
+                          setEditModal(true)
+                        }}
+                      >
+                        Edit&nbsp;
+                        {listItem.item}
+                      </button>
+                      <br />
+
+                    </>
+                  )
+                  : (<br />)}
+              </>
+            ))}
+
+            <Modal show={editModal}>
+              <button
+                type="submit"
+                onClick={deleteItem}
+              >
+                Delete
+              </button>
+              <input onChange={e => setQuant(e.target.value)} />
+              <button
+                type="submit"
+                onClick={updateItem}
+              >
+                update
+              </button>
+            </Modal>
           </>
         ) : (
-      // <Link to="/login">
-          <>
-            <Button variant="primary">
-              Log in to add an item
-            </Button>
-            <br />
-          </>
-      // </Link>
+          <Link to="/login">
+            <>
+              <Button variant="primary">
+                Log in to add and view items
+              </Button>
+              <br />
+            </>
+          </Link>
         )}
-      {shopList.map(listItem => (
-        <>
-          {listItem.item}
-          &nbsp;
-          {listItem.quantity}
-          <br />
-          {loggedIn
-            ? (
-              <>
-                <button
-                  type="submit"
-                  onClick={e => {
-                    setIt(listItem.item)
-                    setQuant(listItem.quantity)
-                    setEditModal(true)
-                  }}
-                >
-                  Edit&nbsp;
-                  {listItem.item}
-                </button>
-                <br />
-
-              </>
-            )
-            : (<br />)}
-        </>
-
-      ))}
-
-      <Modal show={editModal}>
-        <button
-          type="submit"
-          onClick={deleteItem}
-        >
-          Delete
-        </button>
-        <input onChange={e => setQuant(e.target.value)} />
-        <button
-          type="submit"
-          onClick={updateItem}
-        >
-          update
-        </button>
-      </Modal>
     </>
   )
 }

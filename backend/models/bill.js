@@ -5,6 +5,7 @@ const billSchema = new Schema({
   amount: Number,
   dateDue: Date,
   paid: Boolean,
+  house: String,
 })
 
 module.exports = model('Bill', billSchema)

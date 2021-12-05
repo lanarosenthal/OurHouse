@@ -7,6 +7,10 @@ const router = express.Router()
 // signup
 router.post('/signup', async (req, res) => {
   const { username, password, house } = req.body
+  console.log(username)
+  console.log(password)
+  console.log(house)
+
   try {
     await User.create({ username, password, house })
     res.send('user created')
