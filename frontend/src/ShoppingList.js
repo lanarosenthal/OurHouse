@@ -92,11 +92,12 @@ const ShoppingList = function ({
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto justify-content-center">
-              <Link to="/shoppinglist">Shopping List</Link>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <Link to="/billslist">Bills</Link>
+              <Link to="/shoppinglist" style={{ color: 'inherit', textDecoration: 'inherit', marginTop: '9px'}}>Shopping List</Link>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <Link to="/calendarlist">Calendar</Link>
+              <Link to="/billslist" style={{ color: 'inherit', textDecoration: 'inherit', marginTop: '9px'}}>Bills</Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to="/calendarlist" style={{ color: 'inherit', textDecoration: 'inherit', marginTop: '9px'}}>Calendar</Link>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -108,13 +109,15 @@ const ShoppingList = function ({
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <h1>Items:</h1>
+      <h1 style={{ textAlign: 'center' }}>Items:</h1>
       {loggedIn
         ? (
           <>
-            <Button variant="primary" onClick={handleShow}>
-              Add an item
-            </Button>
+            <div className="additem">
+              <Button variant="primary" onClick={handleShow}>
+                Add an item
+              </Button>
+            </div>
             <br />
             <Modal show={show} onHide={handleClose}>
               <div>
@@ -133,7 +136,7 @@ const ShoppingList = function ({
               </div>
             </Modal>
             {shopList.map(listItem => (
-              <Card className="card-deck">
+              <Card className="cards">
                 {listItem.item}
               &nbsp;
                 {listItem.quantity}
@@ -141,7 +144,7 @@ const ShoppingList = function ({
                 {loggedIn
                   ? (
                     <>
-                      <button
+                      <Button
                         type="submit"
                         onClick={e => {
                           setIt(listItem.item)
@@ -151,7 +154,7 @@ const ShoppingList = function ({
                       >
                         Edit&nbsp;
                         {listItem.item}
-                      </button>
+                      </Button>
                       <br />
 
                     </>
@@ -160,27 +163,29 @@ const ShoppingList = function ({
               </Card>
             ))}
             <Modal show={editModal}>
-              <button
+              <Button
                 type="submit"
                 onClick={deleteItem}
               >
                 Delete
-              </button>
+              </Button>
               <input onChange={e => setQuant(e.target.value)} />
-              <button
+              <Button
                 type="submit"
                 onClick={updateItem}
               >
                 update
-              </button>
+              </Button>
             </Modal>
           </>
         ) : (
           <Link to="/login">
             <>
-              <Button variant="primary">
-                Log in to add and view items
-              </Button>
+              <div className="additem">
+                <Button variant="primary">
+                  Log in to add and view items
+                </Button>
+              </div>
               <br />
             </>
           </Link>

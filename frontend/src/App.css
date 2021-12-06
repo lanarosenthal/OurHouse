@@ -10,6 +10,26 @@
   margin-bottom: auto;
 }
 
+.cards {
+  align-items: center;
+  justify-content: center;
+  width: 10%;
+  height: 20%;
+  margin-left: auto;
+  display: inline-block;
+  margin-right: auto;
+  margin-bottom: auto;
+}
+
+.additem {
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  display: flex;
+  margin-right: auto;
+  margin-bottom: auto;
+}
+
 .forminside {
   /* display: flex; */
   width: 60%;

@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
+import Card from 'react-bootstrap/Card'
 
 import Container from 'react-bootstrap/Container'
 import { Link } from 'react-router-dom'
@@ -63,12 +64,13 @@ const BillsList = function ({ setLoggedIn, setSessionUsername, loggedIn }) {
           <Navbar.Brand>OurHouse</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Link to="/shoppinglist">Shopping List</Link>
+            <Nav className="me-auto justify-content-center">
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <Link to="/billslist">Bills</Link>
+              <Link to="/shoppinglist" style={{ color: 'inherit', textDecoration: 'inherit', marginTop: '9px'}}>Shopping List</Link>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <Link to="/calendarlist">Calendar</Link>
+              <Link to="/billslist" style={{ color: 'inherit', textDecoration: 'inherit', marginTop: '9px'}}>Bills</Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to="/calendarlist" style={{ color: 'inherit', textDecoration: 'inherit', marginTop: '9px'}}>Calendar</Link>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -80,13 +82,15 @@ const BillsList = function ({ setLoggedIn, setSessionUsername, loggedIn }) {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <h1>Bills:</h1>
+      <h1 style={{ textAlign: 'center' }}>Bills:</h1>
       {loggedIn
         ? (
           <>
-            <Button variant="primary" onClick={handleShow}>
-              Add a bill
-            </Button>
+            <div className="additem">
+              <Button variant="primary" onClick={handleShow}>
+                Add a bill
+              </Button>
+            </div>
             <br />
             <Modal show={show} onHide={handleClose}>
               Bill Description:
@@ -105,7 +109,7 @@ const BillsList = function ({ setLoggedIn, setSessionUsername, loggedIn }) {
               </Modal.Footer>
             </Modal>
             {billList.map(bill => (
-              <>
+              <Card className="cards">
                 {bill.billType}
                 <br />
                 {bill.amount}
@@ -117,7 +121,7 @@ const BillsList = function ({ setLoggedIn, setSessionUsername, loggedIn }) {
                 <br />
                 {!bill.paid
                   ? (
-                    <button
+                    <Button
                       type="submit"
                       onClick={e => {
                         setID(bill._id)
@@ -128,17 +132,19 @@ const BillsList = function ({ setLoggedIn, setSessionUsername, loggedIn }) {
                       }}
                     >
                       Mark as Paid
-                    </button>
+                    </Button>
                   ) : (<br />)}
-              </>
+              </Card>
             ))}
           </>
         ) : (
           <Link to="/login">
             <>
-              <Button variant="primary">
-                Log in to add a bill
-              </Button>
+              <div className="additem">
+                <Button variant="primary">
+                  Log in to add a bill
+                </Button>
+              </div>
               <br />
             </>
           </Link>
